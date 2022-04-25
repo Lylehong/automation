@@ -1,0 +1,37 @@
+[2022-04-24 13:53:12,716][test_login.py-->line:53][INFO] --【邮箱不合法-为空】--用例执行成功
+[2022-04-24 13:53:12,760][test_login.py-->line:53][INFO] --【邮箱不合法-空格】--用例执行成功
+[2022-04-24 13:53:12,796][test_login.py-->line:53][INFO] --【邮箱不合法-纯数字】--用例执行成功
+[2022-04-24 13:53:12,833][test_login.py-->line:53][INFO] --【邮箱不合法-纯字母】--用例执行成功
+[2022-04-24 13:53:12,870][test_login.py-->line:53][INFO] --【邮箱不合法-纯特殊字符】--用例执行成功
+[2022-04-24 13:53:12,908][test_login.py-->line:53][INFO] --【邮箱不合法-邮箱前后空格】--用例执行成功
+[2022-04-24 13:53:12,944][test_login.py-->line:53][INFO] --【邮箱不合法-邮箱无@符号】--用例执行成功
+[2022-04-24 13:53:12,984][test_login.py-->line:53][INFO] --【邮箱不合法-邮箱无.com/.net结尾】--用例执行成功
+[2022-04-24 13:53:13,117][test_login.py-->line:53][INFO] --【密码不符需求-纯数字MD5加密（8-20位）】--用例执行成功
+[2022-04-24 13:53:13,249][test_login.py-->line:53][INFO] --【密码不符需求-纯字母MD5加密（8-20位）】--用例执行成功
+[2022-04-24 13:53:13,383][test_login.py-->line:53][INFO] --【密码不符需求-纯特殊字符MD5加密（8-20位）】--用例执行成功
+[2022-04-24 13:53:13,522][test_login.py-->line:53][INFO] --【密码不符需求-字母+数字MD5加密（小于8位）】--用例执行成功
+[2022-04-24 13:53:13,652][test_login.py-->line:53][INFO] --【密码不符需求-字母+数字MD5加密（大于20位）】--用例执行成功
+[2022-04-24 13:53:13,780][test_login.py-->line:53][INFO] --【密码不符需求-密码前后空格】--用例执行成功
+[2022-04-24 13:53:13,920][test_login.py-->line:53][INFO] --【账号密码正确-登录成功】--用例执行成功
+[2022-04-24 13:53:14,307][test_register.py-->line:92][INFO] --【邮箱账号密码正确-注册成功】--用例执行成功
+[2022-04-24 13:53:14,381][test_register.py-->line:92][INFO] --【邮箱不合法-为空】--用例执行成功
+[2022-04-24 13:53:14,455][test_register.py-->line:92][INFO] --【邮箱不合法-空格】--用例执行成功
+[2022-04-24 13:53:14,527][test_register.py-->line:92][INFO] --【邮箱不合法-纯数字】--用例执行成功
+[2022-04-24 13:53:14,597][test_register.py-->line:92][INFO] --【邮箱不合法-纯字母】--用例执行成功
+[2022-04-24 13:53:14,666][test_register.py-->line:92][INFO] --【邮箱不合法-纯特殊字符】--用例执行成功
+[2022-04-24 13:53:14,740][test_register.py-->line:92][INFO] --【邮箱不合法-邮箱前空格】--用例执行成功
+[2022-04-24 13:53:14,815][test_register.py-->line:92][INFO] --【邮箱不合法-邮箱后空格】--用例执行成功
+[2022-04-24 13:53:14,887][test_register.py-->line:92][INFO] --【邮箱不合法-邮箱无@符号】--用例执行成功
+[2022-04-24 13:53:14,958][test_register.py-->line:92][INFO] --【邮箱不合法-邮箱无.com/.net结尾】--用例执行成功
+[2022-04-24 13:53:15,030][test_register.py-->line:92][INFO] --【密码不符需求-纯数字（8-20位）】--用例执行成功
+[2022-04-24 13:53:15,100][test_register.py-->line:92][INFO] --【密码不符需求-纯字母（8-20位）】--用例执行成功
+[2022-04-24 13:53:15,176][test_register.py-->line:92][INFO] --【密码不符需求-纯特殊字符（8-20位）】--用例执行成功
+[2022-04-24 13:53:15,246][test_register.py-->line:92][INFO] --【密码不符需求-字母+数字（小于8位）】--用例执行成功
+[2022-04-24 13:53:15,465][test_register.py-->line:88][ERROR] --【密码不符需求-字母+数字（大于20位）】--用例执行失败：
+[2022-04-24 13:53:15,465][test_register.py-->line:89][ERROR] 100008 not equal 0
+Traceback (most recent call last):
+  File "D:\automation\testcase\test_register.py", line 66, in test_register
+    assert_in_dict(expected, res)
+  File "D:\automation\common\handle_assert.py", line 27, in assert_in_dict
+    raise AssertionError("{} not equal {}".format(expected[k], act[k]))
+AssertionError: 100008 not equal 0

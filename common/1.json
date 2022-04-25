@@ -1,0 +1,7 @@
+{
+  "operationName": "QueryProductVariantQuantity",
+  "variables": {
+    "id": "gid://shopify/ProductVariant/42770312560867"
+  },
+  "query": "query QueryProductVariantQuantity($id: ID!) {\n  node(id: $id) {\n    ... on ProductVariant {\n      quantityAvailable\n      __typename\n    }\n    __typename\n  }\n}\n"
+}

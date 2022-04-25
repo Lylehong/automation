@@ -1,0 +1,22 @@
+[2022-04-24 13:34:58,233][test_register.py-->line:92][INFO] --【邮箱账号密码正确-注册成功】--用例执行成功
+[2022-04-24 13:34:58,311][test_register.py-->line:92][INFO] --【邮箱不合法-为空】--用例执行成功
+[2022-04-24 13:34:58,390][test_register.py-->line:92][INFO] --【邮箱不合法-空格】--用例执行成功
+[2022-04-24 13:34:58,462][test_register.py-->line:92][INFO] --【邮箱不合法-纯数字】--用例执行成功
+[2022-04-24 13:34:58,539][test_register.py-->line:92][INFO] --【邮箱不合法-纯字母】--用例执行成功
+[2022-04-24 13:34:58,609][test_register.py-->line:92][INFO] --【邮箱不合法-纯特殊字符】--用例执行成功
+[2022-04-24 13:34:58,699][test_register.py-->line:92][INFO] --【邮箱不合法-邮箱前空格】--用例执行成功
+[2022-04-24 13:34:58,769][test_register.py-->line:92][INFO] --【邮箱不合法-邮箱后空格】--用例执行成功
+[2022-04-24 13:34:58,838][test_register.py-->line:92][INFO] --【邮箱不合法-邮箱无@符号】--用例执行成功
+[2022-04-24 13:34:58,914][test_register.py-->line:92][INFO] --【邮箱不合法-邮箱无.com/.net结尾】--用例执行成功
+[2022-04-24 13:34:58,988][test_register.py-->line:92][INFO] --【密码不符需求-纯数字（8-20位）】--用例执行成功
+[2022-04-24 13:34:59,063][test_register.py-->line:92][INFO] --【密码不符需求-纯字母（8-20位）】--用例执行成功
+[2022-04-24 13:34:59,135][test_register.py-->line:92][INFO] --【密码不符需求-纯特殊字符（8-20位）】--用例执行成功
+[2022-04-24 13:34:59,208][test_register.py-->line:92][INFO] --【密码不符需求-字母+数字（小于8位）】--用例执行成功
+[2022-04-24 13:34:59,599][test_register.py-->line:88][ERROR] --【密码不符需求-字母+数字（大于20位）】--用例执行失败：
+[2022-04-24 13:34:59,599][test_register.py-->line:89][ERROR] 100008 not equal 0
+Traceback (most recent call last):
+  File "D:\automation\testcase\test_register.py", line 66, in test_register
+    assert_in_dict(expected, res)
+  File "D:\automation\common\handle_assert.py", line 27, in assert_in_dict
+    raise AssertionError("{} not equal {}".format(expected[k], act[k]))
+AssertionError: 100008 not equal 0
