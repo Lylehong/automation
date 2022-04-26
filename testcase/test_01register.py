@@ -10,7 +10,7 @@ import requests
 import os
 from unittestreport import ddt, list_data
 from common.handle_excel import HandleExcel
-from common.handle_conf import conf
+from common.handle_conf import conf, fp
 from common.handle_dir import DATA_DIR
 from common.handle_assert import assert_in_dict
 from common.handle_log import my_log
@@ -20,9 +20,9 @@ from common.handle_data import replace_data
 
 
 @ddt
-class TestRegister(unittest.TestCase, BaseCase):
+class TestRegister(BaseCase):
     # 获取用例数据
-    excel = HandleExcel(os.path.join(DATA_DIR, "注册接口用例.xlsx"), "Sheet1")
+    excel = HandleExcel(os.path.join(DATA_DIR, "注册接口用例.xlsx"), "注册")
     cases = excel.read_data()
     # 获取请求头
     headers = eval(conf.get("request", "headers"))
@@ -46,6 +46,8 @@ class TestRegister(unittest.TestCase, BaseCase):
     @list_data(cases)
     def test_register(self, itme):
         # 获取请求url地址
+        if not itme["url"]:
+            return
         url = self.base_url + itme["url"]
         # 获取请求方法
         method = itme["method"].lower()
@@ -69,6 +71,10 @@ class TestRegister(unittest.TestCase, BaseCase):
                 assert res["data"]["nickname"] == self.nickname
                 # 校验id不为空
                 assert res["data"]["id"] is not None
+                # 保存邮箱至conf.ini
+                conf.set("register_email", "email", self.email)
+                with open(fp, "w") as f:
+                    conf.write(f)
             elif title == "密码不符需求-字母+数字（小于8位）":
                 msg = [
                     "password:Password min 8 characters, max 32 characters | password:Password at least one lowercase "

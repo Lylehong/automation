@@ -11,9 +11,10 @@ import requests
 
 from common.handle_conf import conf
 from common.handle_dir import CONF_DIR
+import unittest
 
 
-class BaseCase:
+class BaseCase(unittest.TestCase):
     """保存为类属性"""
 
     @classmethod

@@ -14,10 +14,11 @@ from common.handle_conf import conf
 from common.handle_dir import DATA_DIR
 from common.handle_assert import assert_in_dict
 from common.handle_log import my_log
+from utils.authorization import BaseCase
 
 
 @ddt
-class TestLogin(unittest.TestCase):
+class TestLogin(BaseCase):
     # 获取用例数据
     excel = HandleExcel(os.path.join(DATA_DIR, "登录接口用例.xlsx"), "Sheet1")
     cases = excel.read_data()
