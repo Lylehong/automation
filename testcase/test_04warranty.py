@@ -56,34 +56,54 @@ class TestWarranty(BaseCase):
         data = item["data"]
         # 替换数据
 
-        if title == "官网渠道-延保成功":
+        if "官网渠道" in title:
             TestWarranty.purchased_channel = "Dreo Official Website"
             TestWarranty.order_number = "DREO" + str(random.randint(1000, 9999))
-        if title == "亚马逊渠道-延保成功":
-            TestWarranty.purchased_channel = "Dreo Official Website"
-            TestWarranty.order_number = "DREO" + str(random.randint(1000, 9999))
-
+        if "亚马逊渠道" in title:
+            TestWarranty.purchased_channel = "AMAZON"
+            TestWarranty.order_number = str(random.randint(100, 999)) + "-" + str(
+                random.randint(1000000, 9999999)) + "-" + str(random.randint(1000000, 9999999))
+        if "沃尔玛渠道" in title:
+            TestWarranty.purchased_channel = "Walmart"
+            TestWarranty.order_number = str(random.randint(1000000, 9999999)) + "-" + str(
+                random.randint(100000, 999999))
+        if "其他渠道" in title:
+            TestWarranty.purchased_channel = "Other"
+            TestWarranty.order_number = "CS" + str(random.randint(10000000, 99999999))
         TestWarranty.first_name, TestWarranty.last_name = get_romanized_name()
         TestWarranty.phone = "+1" + get_phone_number()
         TestWarranty.current_time = time.strftime("%Y/%m/%d", time.localtime())
         data = replace_data(data, TestWarranty)
+        # 只针对沃尔玛订单号添加 #号
+        if "沃尔玛" in title:
+            data = eval(data)
+            data["orderNumber"] = "#" + data["orderNumber"]
+        # 判断类型是不是字典格式
+        if not isinstance(data, dict):
+            data = eval(data)
         # expected
         expected = eval(item["expected"])
         # 请求
-        response = requests.request(method=method, url=url, json=eval(data), headers=self.headers)
+        response = requests.request(method=method, url=url, json=data, headers=self.headers)
         resp = response.json()
         print(resp)
         try:
             if resp["code"] == 0 and resp["msg"] == "OK":
-                # TODO:未完成
                 # 校验用户名
-
+                assert resp["data"]["firstName"] == TestWarranty.first_name
+                assert resp["data"]["lastName"] == TestWarranty.last_name
                 # 校验订单号
-
+                if "沃尔玛" in title:
+                    assert resp["data"]["orderNumber"] == "#" + TestWarranty.order_number
+                else:
+                    assert resp["data"]["orderNumber"] == TestWarranty.order_number
                 # 校验手机号
-
+                assert resp["data"]["phone"] == TestWarranty.phone
                 # 校验日期
-                pass
+                assert resp["data"]["purchasedDate"] == TestWarranty.current_time
+                assert_in_dict(expected, resp)
+            elif resp["code"] == 3050001:
+                assert resp["msg"] == "Warranty is existed."
             else:
                 assert_in_dict(expected, resp)
         except AssertionError as e:
