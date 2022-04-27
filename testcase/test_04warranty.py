@@ -76,8 +76,11 @@ class TestWarranty(BaseCase):
         data = replace_data(data, TestWarranty)
         # 只针对沃尔玛订单号添加 #号
         if "沃尔玛" in title:
-            data = eval(data)
-            data["orderNumber"] = "#" + data["orderNumber"]
+            if "#号" in title:
+                data = eval(data)
+            else:
+                data = eval(data)
+                data["orderNumber"] = "#" + data["orderNumber"]
         # 判断类型是不是字典格式
         if not isinstance(data, dict):
             data = eval(data)
@@ -102,8 +105,8 @@ class TestWarranty(BaseCase):
                 # 校验日期
                 assert resp["data"]["purchasedDate"] == TestWarranty.current_time
                 assert_in_dict(expected, resp)
-            elif resp["code"] == 3050001:
-                assert resp["msg"] == "Warranty is existed."
+            # elif resp["code"] == 3050001:
+            #     assert resp["msg"] == "Warranty is existed."
             else:
                 assert_in_dict(expected, resp)
         except AssertionError as e:
