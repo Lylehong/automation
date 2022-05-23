@@ -24,7 +24,7 @@ class TestSubscribe(BaseCase):
     """订阅"""
 
     # 获取所有cases用例
-    excel = HandleExcel(os.path.join(DATA_DIR, "注册接口用例.xlsx"), "订阅")
+    excel = HandleExcel(os.path.join(DATA_DIR, "订阅接口用例.xlsx"), "订阅")
     cases = excel.read_data()
 
     # 获取已注册成功邮箱
