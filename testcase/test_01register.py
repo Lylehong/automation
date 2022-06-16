@@ -50,7 +50,7 @@ class TestRegister(BaseCase):
             return
         url = self.base_url + itme["url"]
         # 获取请求方法
-        method = itme["method"].lower()
+        method = itme["method"].upper()
         # 获取请求参数
         data = itme["data"]
         # 替换email

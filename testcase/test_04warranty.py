@@ -89,7 +89,6 @@ class TestWarranty(BaseCase):
         # 请求
         response = requests.request(method=method, url=url, json=data, headers=self.headers)
         resp = response.json()
-        print(resp)
         try:
             if resp["code"] == 0 and resp["msg"] == "OK":
                 # 校验用户名

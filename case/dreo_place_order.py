@@ -250,15 +250,14 @@ class DreoPlaceOrder:
         driver.find_element(By.XPATH, '//*[@id="continue_button"]').click()
         time.sleep(10)
 
-    def self_order(self, base_url,headers):
+    def self_order(self, base_url, headers):
         """
         校验下单支付是否成功
         :return:
         """
         cur_url = "/api/transaction/order/page/self"
-        url = cur_url + base_url
-        return self.request_method(headers=headers,url=url,data=None,method="GET")
-
+        url = base_url + cur_url
+        return self.request_method(headers=headers, url=url, data=None, method="GET")
 
     @staticmethod
     def request_method(headers, url, data, method="POST"):
