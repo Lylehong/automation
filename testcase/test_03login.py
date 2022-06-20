@@ -5,13 +5,10 @@
 @date:2022/4/15 17:00
 """
 
-import unittest
 import requests
-import os
 from unittestreport import ddt, list_data
 from common.handle_excel import HandleExcel
 from common.handle_conf import conf
-from common.handle_dir import DATA_DIR
 from common.handle_assert import assert_in_dict
 from common.handle_log import my_log
 from utils.authorization import BaseCase
@@ -20,7 +17,7 @@ from utils.authorization import BaseCase
 @ddt
 class TestLogin(BaseCase):
     # 获取用例数据
-    excel = HandleExcel(os.path.join(DATA_DIR, "登录接口用例.xlsx"), "Sheet1")
+    excel = HandleExcel("登录接口用例.xlsx", "Sheet1")
     cases = excel.read_data()
     # 获取请求头
     headers = eval(conf.get("request", "headers"))

@@ -4,15 +4,11 @@
 @author:Lyle.Hong
 @date:2022/4/26 9:10
 """
-import os
-
 import requests
-
 from common.handle_data import replace_data
 from common.handle_excel import HandleExcel
-from common.handle_faker import get_email
+from common.handle_faker import Fakers
 from utils.authorization import BaseCase
-from common.handle_dir import DATA_DIR
 from common.handle_conf import conf
 from unittestreport import ddt, list_data
 from common.handle_assert import assert_in_dict
@@ -24,7 +20,7 @@ class TestSubscribe(BaseCase):
     """订阅"""
 
     # 获取所有cases用例
-    excel = HandleExcel(os.path.join(DATA_DIR, "订阅接口用例.xlsx"), "订阅")
+    excel = HandleExcel("订阅接口用例.xlsx", "订阅")
     cases = excel.read_data()
 
     # 获取已注册成功邮箱
@@ -33,6 +29,7 @@ class TestSubscribe(BaseCase):
     headers = eval(conf.get("request", "headers"))
     # 获取url
     base_url = conf.get("request", "url")
+    fk = Fakers("zh_CN")
 
     @list_data(cases)
     def test_subscribe(self, item):
@@ -60,7 +57,7 @@ class TestSubscribe(BaseCase):
                 assert res["data"]["id"] is not None
             elif res["code"] == 3050003 and res["msg"] == "You have subscribed.":
                 # 获取随机邮箱发送订阅请求
-                email = get_email()
+                email = self.fk.get_email()
                 # 动态创建元类
                 test_mode = type("TestMode", (object,), {"email": email})
                 current_url = replace_data(item["url"], test_mode)

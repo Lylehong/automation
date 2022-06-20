@@ -6,13 +6,15 @@
 """
 
 import openpyxl
+from common.handle_dir import DATA_DIR
+import os
 
 
 class HandleExcel:
     """操作Excel"""
 
     def __init__(self, file_name, sheet_name):
-        self.file_name = file_name
+        self.file_name = os.path.join(DATA_DIR, file_name)
         self.sheet_name = sheet_name
 
     def read_data(self):

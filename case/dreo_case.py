@@ -53,13 +53,34 @@ class TestDreoCase(BaseCase):
         url = self.base_url + cur_url
         data = {
             "code": "{}".format(code)
-                }
+        }
         return self.rq(url, headers=self.headers, json=data)
 
-    def edit_info(self):
-        pass
+    def edit_info(self, email, nickname, firstname, lastname, gender, birthdate):
+        """
+        :param email: 邮箱
+        :param nickname:
+        :param firstname:
+        :param lastname:
+        :param gender:
+        :param birthdate:
+        :return:
+        """
+        cur_url = "/api/user/info"
+        url = self.base_url + cur_url
+        data = {"email": email, "nickname": nickname, "firstName": firstname, "lastName": lastname,
+                "gender": gender, "birthdate": birthdate}
+        return self.rq(url=url, headers=self.headers, json=data)
+
+    def get_all_countries(self):
+        """
+        获取所以收货地址
+        :return:
+        """
+        cur_url = "/api/countries"
+        url = "https://website-fat.dreo.com:18001/"+cur_url
+        return self.rq(url=url, method="GET", headers=self.headers)
+
 
     def edit_password(self):
         pass
-
-

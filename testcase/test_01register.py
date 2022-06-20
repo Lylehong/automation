@@ -5,37 +5,35 @@
 @date:2022/4/15 17:00
 """
 
-import unittest
 import requests
-import os
 from unittestreport import ddt, list_data
 from common.handle_excel import HandleExcel
 from common.handle_conf import conf, fp
-from common.handle_dir import DATA_DIR
 from common.handle_assert import assert_in_dict
 from common.handle_log import my_log
 from utils.authorization import BaseCase
-from common.handle_faker import get_email, get_nickname
+from common.handle_faker import Fakers
 from common.handle_data import replace_data
 
 
 @ddt
 class TestRegister(BaseCase):
     # 获取用例数据
-    excel = HandleExcel(os.path.join(DATA_DIR, "注册接口用例.xlsx"), "注册")
+    excel = HandleExcel("注册接口用例.xlsx", "注册")
     cases = excel.read_data()
     # 获取请求头
     headers = eval(conf.get("request", "headers"))
     # 获取默认url根路径
     base_url = conf.get("request", "url")
+    fk = Fakers("zh_CN")
 
     def setUp(self) -> None:
         # 获取Authorization
         self.get_authorization()
         # 获取随机测试邮箱
-        TestRegister.email = get_email()
+        TestRegister.email = self.fk.get_email()
         # 获取随机名字
-        TestRegister.nickname = get_nickname()
+        TestRegister.nickname = self.fk.get_nickname()
         # 添加鉴权access_token
         self.headers["Authorization"] = self.Authorization
 

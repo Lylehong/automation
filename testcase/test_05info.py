@@ -13,10 +13,9 @@ import requests
 from common.handle_assert import assert_in_dict
 from common.handle_data import replace_data
 from common.handle_excel import HandleExcel
-from common.handle_faker import get_nickname, get_first_name, get_last_name
+from common.handle_faker import Fakers
 from utils.authorization import BaseCase
 from unittestreport import ddt, list_data
-from common.handle_dir import DATA_DIR
 from common.handle_conf import conf
 from common.handle_log import my_log
 
@@ -25,14 +24,15 @@ from common.handle_log import my_log
 class TestInfo(BaseCase):
     """info接口"""
     # 读取excel文件
-    excel = HandleExcel(os.path.join(DATA_DIR, "个人信息接口用例.xlsx"), "Sheet1")
+    excel = HandleExcel("个人信息接口用例.xlsx", "Sheet1")
     # 获取所有测试用例
     cases = excel.read_data()
     # 登录成功的email
     email = conf.get("register_email", "email")
-    nickname = get_nickname()
-    firstname = get_first_name()
-    lastname = get_last_name()
+    fk = Fakers("zh_CN")
+    nickname = fk.get_nickname()
+    firstname = fk.get_first_name()
+    lastname = fk.get_last_name()
     gender = random.choice(["male", "female", "other"])
     birthdate = str(time.strftime("%Y-%m-%d")) + "T00:00:00.000Z"
 
